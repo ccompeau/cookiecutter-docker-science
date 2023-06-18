@@ -1,7 +1,11 @@
 FROM {{cookiecutter.project_slug}}-image-base
 
 COPY ./requirements_dev.txt /requirements_dev.txt
-RUN pip install -r /requirements_dev.txt
+RUN python -m pip install -r /requirements_dev.txt
+
+# Install ipykernel and create a new Python 3.11 kernel for Jupyter
+RUN python -m pip install ipykernel \
+  && python -m ipykernel install --user --name=python3.11
 
 WORKDIR /work
 
